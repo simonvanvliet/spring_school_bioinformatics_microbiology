@@ -12,10 +12,10 @@ def to_str(posixpath):
 
 #set paths
 root = pathlib.Path(pathlib.Path.home(), 'home', 'Delta2_Data')
-data_dir = root / 'Niklas' 
+data_dir = root / 'kazumasa-for-simon-transposed' 
 
 #create output dir
-output_path = root / 'Niklas_processed'
+output_path = root / 'kazumasa_processed'
 (output_path).mkdir(exist_ok=True) #create output data folder,  each position will be placed in a subfolder
 
 #get config file
