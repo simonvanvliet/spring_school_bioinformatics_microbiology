@@ -1,5 +1,3 @@
-
-
 import pathlib
 import delta.config as cfg
 from delta.utilities import xpreader
