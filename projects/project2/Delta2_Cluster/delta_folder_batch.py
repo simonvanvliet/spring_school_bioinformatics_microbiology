@@ -14,42 +14,41 @@ def to_str(posixpath):
 
 #set paths
 root = pathlib.Path(pathlib.Path.home(), 'home', 'Delta2_Data')
-data_dir = root / 'Niklas' 
+data_dir = root / 'Maya' 
 
 #create output dir
-output_path = root / 'Niklas_processed'
-(output_path).mkdir(exist_ok=True) #create output data folder,  each position will be placed in a subfolder
+output_root = root / 'Maya_processed'
+(output_root).mkdir(exist_ok=True) #create output data folder,  each position will be placed in a subfolder
 
 #get config file
 config_file = root / 'config_2D.json'
 cfg.load_config(config_file)
 
 #find subfolders
-file_names = [f.name for f in sorted(data_dir.glob('*.tif*'))]
+folder_names = [f for f in data_dir.iterdir() if f.is_dir()]
 
 for folder in folder_names:
     #get images in subfolder
-    movie_names = [f.name for f in sorted((data_dir / folder).glob('*.tif*'))]
+    movie_names = [f.name for f in sorted(folder.glob('*.tif*'))]
 
     #create output subfolder
-    output_path = output_root / folder
+    output_path = output_root / folder.name
     (output_path).mkdir(exist_ok=True) #create output data folder,  each position will be placed in a subfolder
 
     for movie in movie_names:        
         #path to current position
-        movie_dir = data_dir / folder / movie
+        movie_dir = folder / movie
         
         #make nickname of movei (adapt to file name structure, here we take the part starting at TL and stopping before __R3D)
-        start = movie.find('TL')
-        end = movie.find('_R3D', start)
-        movie_name_short = movie[start:end]
+        end = movie.find('_R3D')
+        movie_name_short = movie[:end]
         
         #make subfolder for current position
         output_dir = output_path / movie_name_short
         (output_dir).mkdir(exist_ok=True)
 
         try:  
-            print('starting with movie %s->%s' %(folder,movie_name_short)) 
+            print('starting with movie %s->%s' %(folder.name, movie_name_short)) 
             # Init reader (use bioformats=True if working with nd2, czi, ome-tiff etc):
             im_reader = xpreader(movie_dir, use_bioformats=True)
 
@@ -67,7 +66,7 @@ for folder in folder_names:
             xp.process()
             
         except:
-            print('error with movie %s->%s, skipping to next' %(folder,movie_name_short)) 
+            print('error with movie %s->%s, skipping to next' %(folder.name, movie_name_short)) 
 
 
 #exit python
