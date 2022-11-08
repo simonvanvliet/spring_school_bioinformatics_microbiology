@@ -8,7 +8,7 @@
 #SBATCH --gres=gpu:1        
 
 # Paths to STDOUT or STDERR files should be absolute or relative to current working directory
-#SBATCH --output=delta2_file_batch_log-%J.oe             #This is the joined STDOUT and STDERR file
+#SBATCH --output=delta2_folder_batch_log-%J.oe             #This is the joined STDOUT and STDERR file
 #SBATCH --mail-type=END,FAIL,TIME_LIMIT
 #SBATCH --mail-user=simon.vanvliet@unibas.ch        #You will be notified via email when your task ends or fails
 

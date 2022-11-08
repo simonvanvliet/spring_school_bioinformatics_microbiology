@@ -4,7 +4,7 @@
 #SBATCH --cpus-per-task=6
 #SBATCH --mem=64G
 #SBATCH --qos=6hours    # 30min, 6hours, 1day, 1week, infinite  --> 6hours default, slurm is backfilling so be specific with time
-#SBATCH --partition=rtx8000  
+#SBATCH --partition=rtx8000,a100
 #SBATCH --gres=gpu:1        # --gres=gpu:2 for two GPU, etc
 #SBATCH -o JupLab-%J.oe
 
