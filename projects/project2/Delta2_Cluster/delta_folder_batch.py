@@ -27,7 +27,7 @@ folder_names = [f for f in data_dir.iterdir() if f.is_dir()]
 
 for folder in folder_names:
     #get images in subfolder
-    movie_names = [f.name for f in sorted(folder.glob('*.tif*'))]
+    movie_names = [f.name for f in sorted(folder.glob('*.dv'))]
 
     #create output subfolder
     output_path = output_root / folder.name
