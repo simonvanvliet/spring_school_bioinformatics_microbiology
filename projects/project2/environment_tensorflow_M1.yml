@@ -1,0 +1,14 @@
+name: tf_env
+channels:
+  - apple
+  - conda-forge
+dependencies:
+  - python=3.9  ## specify desired version
+  - pip
+  - tensorflow-deps
+  - ipykernel
+  - jupyterlab
+  ## PyPI packages
+  - pip:
+    - tensorflow-macos
+    - tensorflow-metal 
